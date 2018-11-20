@@ -19,7 +19,7 @@
             android:id="@+id/Login_email"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignStart="@+id/Login_password"
+            android:layout_alignLeft="@+id/Login_password"
             android:layout_alignParentBottom="true"
             android:layout_marginTop="254dp"
             android:layout_marginBottom="275dp"

@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
         tabLayout = (TabLayout) findViewById(R.id.tabLayout);
 
         adapter = new TabAdapter(getSupportFragmentManager());
-        adapter.addFragment(new Tab1Fragment(), "홈");
+        adapter.addFragment(new ListViewFragment(), "홈");
         adapter.addFragment(new Tab2Fragment(), "내 강의");
         adapter.addFragment(new CalandarFragment(), "일정");
         adapter.addFragment(new Tab2Fragment(), "설정");

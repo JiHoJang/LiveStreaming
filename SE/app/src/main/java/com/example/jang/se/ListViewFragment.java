@@ -20,7 +20,8 @@ public class ListViewFragment extends Fragment {
         public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_home, container, false);
             lv = rootView.findViewById(R.id.listView);
-            custom = addItems();
+            if(custom==null)
+                custom = addItems();
             adapter = new CustomListAdapter(this.getContext(), custom);
             lv.setAdapter(adapter);
 

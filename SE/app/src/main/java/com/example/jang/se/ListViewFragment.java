@@ -1,40 +1,93 @@
 package com.example.jang.se;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
 
-public class ListViewFragment extends Fragment {
-        ArrayList<LectureItem> custom = null;
-        ListView lv = null;
-        ArrayAdapter adapter = null;
-        ArrayList<LectureItem> elementos = new ArrayList<LectureItem>();
+public class ListViewFragment extends Fragment  {
+    private static final int DIALOG_REQUEST_CODE = 1234;
+    ArrayList<LectureItem> custom = null;
+    ListView lv = null;
+    FloatingActionButton addButton;
+    ArrayAdapter adapter = null;
+    ArrayList<LectureItem> elementos = new ArrayList<LectureItem>();
 
-        public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_home, container, false);
-            lv = rootView.findViewById(R.id.listView);
-            if(custom==null)
-                custom = addItems();
-            adapter = new CustomListAdapter(this.getContext(), custom);
-            lv.setAdapter(adapter);
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View rootView = inflater.inflate(R.layout.fragment_home, container, false);
 
-            return rootView;
+        lv = rootView.findViewById(R.id.listView);
+        if(custom==null)
+            custom = addItems();
+        adapter = new CustomListAdapter(this.getContext(), custom);
+        lv.setAdapter(adapter);
+
+        addButton = (FloatingActionButton)rootView.findViewById(R.id.addButton);
+        addButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                show();
+            }
+        });
+
+        return rootView;
+
+    }
+
+
+    void show(){
+        DialogFragment newFragment = new DialogFragmentAddLecture();
+        newFragment.setTargetFragment(this, DIALOG_REQUEST_CODE);
+        newFragment.show(getFragmentManager(),"dialog");
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == DIALOG_REQUEST_CODE) {
+
+            if (resultCode == Activity.RESULT_OK) {
+
+                String lectureName = data.getExtras().getString("lectureName");
+                String lecturerName = data.getExtras().getString("lecturerName");
+                int numPeople = data.getExtras().getInt("numPeople");
+
+                Toast.makeText(getActivity(), lectureName+"/"+lecturerName,Toast.LENGTH_LONG).show();
+                LectureItem addItems= new LectureItem(lectureName, lecturerName, numPeople, R.drawable.home);
+                elementos.add(addItems);
+            }
+
         }
 
-        private ArrayList<LectureItem> addItems(){
-            LectureItem custom = new LectureItem("기초영어", "json", 1, R.drawable.home);
-            elementos.add(custom);
-            custom = new LectureItem("영어", "현민지",2, R.drawable.home);
-            elementos.add(custom);
-            return elementos;
-        }
+
+
+    }
+
+    private ArrayList<LectureItem> addItems(){
+        LectureItem custom = new LectureItem("기초영어", "json", 1, R.drawable.home);
+        elementos.add(custom);
+        custom = new LectureItem("영어", "현민지",2, R.drawable.home);
+        elementos.add(custom);
+        return elementos;
+    }
+
+
+
+
 /*
         public boolean onOptionsItemSelected(MenuItem item) {
             // Handle action bar item clicks here. The action bar will

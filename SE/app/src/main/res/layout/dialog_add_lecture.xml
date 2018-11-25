@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
+    android:paddingTop="16dp" >
+
+    <TextView
+        android:id="@+id/textviewLogo"
+        android:layout_width="221dp"
+        android:layout_height="54dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="16dp"
+        android:textSize="30dp"
+        android:gravity="center"
+        android:text="강의 추가" />
+
+    <TextView
+        android:id="@+id/textviewLectureName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textviewLogo"
+        android:text="강의 명"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <EditText
+        android:id="@+id/edittextLectureName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:layout_marginBottom="10dp"
+        android:layout_below="@+id/textviewLectureName">
+
+        <requestFocus />
+    </EditText>
+
+    <TextView
+        android:id="@+id/textviewLecturerName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="강사 명"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_below="@+id/edittextLectureName" />
+
+    <EditText
+        android:id="@+id/edittextLecturerName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:layout_marginBottom="10dp"
+        android:layout_below="@+id/textviewLecturerName"/>
+
+    <TextView
+        android:id="@+id/textviewNumPeople"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="강좌 인원"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_below="@+id/edittextLecturerName" />
+
+    <EditText
+        android:id="@+id/edittextNumPeople"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:layout_marginBottom="10dp"
+        android:layout_below="@+id/textviewNumPeople"/>
+
+    <Button
+        android:id="@+id/buttonSubmit"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/edittextNumPeople"
+        android:layout_marginBottom="20dp"
+        android:text="강의 등록" />
+
+</RelativeLayout>

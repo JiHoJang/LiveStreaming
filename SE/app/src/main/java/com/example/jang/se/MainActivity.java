@@ -39,4 +39,5 @@ public class MainActivity extends AppCompatActivity {
         tabLayout.getTabAt (2).setIcon(tabIcons[2]);
         tabLayout.getTabAt (3).setIcon(tabIcons[3]);
     }
+
 }

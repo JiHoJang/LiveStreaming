@@ -4,7 +4,7 @@ android {
     compileSdkVersion 28
     defaultConfig {
         applicationId "com.example.jang.se"
-        minSdkVersion 15
+        minSdkVersion 16
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
@@ -17,7 +17,11 @@ android {
         }
     }
 }
-
+allprojects {
+    repositories {
+        maven { url "https://jitpack.io" }
+    }
+}
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'com.android.support:appcompat-v7:28.0.0'
@@ -30,6 +34,7 @@ dependencies {
     implementation 'com.android.volley:volley:1.1.0'
     implementation project (':libstreaming')
     implementation 'de.mrmaffen:vlc-android-sdk:2.0.6'
+    implementation 'com.github.mancj:MaterialSearchBar:0.8.1'
     compile 'com.prolificinteractive:material-calendarview:1.4.3'
     implementation 'com.android.support:cardview-v7:28.0.0'
 }

@@ -13,12 +13,15 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
-
+import com.mancj.materialsearchbar.MaterialSearchBar;
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class ListViewFragment extends Fragment  {
     private static final int DIALOG_REQUEST_CODE = 1234;
+    private List<String> lastSearches;
+    private MaterialSearchBar searchBar;
     ArrayList<LectureItem> custom = null;
     ListView lv = null;
     FloatingActionButton addButton;
@@ -42,6 +45,7 @@ public class ListViewFragment extends Fragment  {
                 show();
             }
         });
+
 
         return rootView;
 

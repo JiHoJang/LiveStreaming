@@ -14,11 +14,20 @@
         android:text = "강의목록"
     />
 
+
+    <com.mancj.materialsearchbar.MaterialSearchBar
+        style="@style/MaterialSearchBarLight"
+        app:mt_hint="강의명/강사명으로 검색"
+        app:mt_maxSuggestionsCount="10"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/searchBar" />
+
     <ListView
         android:id="@+id/listView"
+        android:layout_below="@+id/searchBar"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/textView"
         android:layout_alignParentLeft="true"
         android:dividerHeight="0px"
         android:divider="#ffffff"

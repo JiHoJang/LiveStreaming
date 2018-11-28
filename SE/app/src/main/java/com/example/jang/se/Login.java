@@ -45,7 +45,7 @@ public class Login extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                 startActivity(intent);
-                /*
+                
                 CheckEditTextIsEmptyOrNot();
                 if(!CheckEditText) {
                     Toast.makeText(Login.this, "Please fill in the blank", Toast.LENGTH_LONG).show();
@@ -89,7 +89,7 @@ public class Login extends AppCompatActivity {
                     }
                 };
                 com.android.volley.RequestQueue requestQueue = Volley.newRequestQueue(Login.this);
-                requestQueue.add(stringRequest);*/
+                requestQueue.add(stringRequest);
             }
         });
     }

@@ -24,7 +24,8 @@ package="com.example.jang.se">
     </activity>
     <activity android:name=".SignUp" />
     <activity android:name=".MainActivity" />
-    <activity android:name=".Video"></activity>
+    <activity android:name=".Video"/>
+    <activity android:name=".LectureInfo"/>
 </application>
 
 </manifest>

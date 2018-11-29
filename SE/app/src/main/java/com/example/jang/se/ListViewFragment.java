@@ -6,9 +6,11 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -42,10 +44,22 @@ public class ListViewFragment extends Fragment  {
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Log.i("item", "add클릭" );
                 show();
             }
         });
+        lv.setChoiceMode(1);
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Log.i("item", position+"클릭" );
+                Intent intent = new Intent(getActivity(), LectureInfo.class);
+                intent.putExtra ("lectureName", elementos.get(position).getTitle() );
+                intent.putExtra ("lecturerName", elementos.get(position).getLecturer());
 
+                startActivity(intent);
+            }
+        });
 
         return rootView;
 

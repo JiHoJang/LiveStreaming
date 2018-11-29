@@ -34,6 +34,7 @@
             android:minHeight="?actionBarSize"
             app:tabBackground="@color/colorPrimary"
             app:tabIndicatorColor="@color/white"
+            app:tabTextColor="@color/white"
             app:tabIndicatorHeight="4dp"
             app:tabMode="fixed">
 

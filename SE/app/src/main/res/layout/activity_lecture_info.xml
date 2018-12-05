@@ -20,33 +20,57 @@
             layout="@layout/app_bar"
             android:id="@+id/app_bar"/>
 
-        <TextView
-            android:layout_below="@id/app_bar"
-            android:id="@+id/lectureInfo_Title"
-            android:layout_width="221dp"
-            android:layout_height="54dp"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="16dp"
-            android:textSize="30dp"
-            android:gravity="center" />
-
-        <TextView
-            android:id="@+id/lectureInfo_LecturerName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/lectureInfo_Title"
-            android:text="강사 명"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
-
-        <TextView
-            android:id="@+id/textView_LectureName"
+        <LinearLayout
+            android:id="@+id/linearLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:ems="10"
-            android:layout_marginBottom="10dp"
-            android:layout_below="@+id/lectureInfo_LecturerName"/>
+            android:layout_below="@id/app_bar"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
 
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="11dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
 
+                <ImageView
+                    android:id="@+id/ivProfile"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:padding="5dp"
+                    app:srcCompat="@mipmap/icon" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_weight="4"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/lectureInfo_LectureName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="강의 명"
+                    android:textAppearance="?android:attr/textAppearanceLarge" />
+
+                <TextView
+                    android:id="@+id/lectureInfo_LecturerName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/lectureInfo_LectureName"
+                    android:layout_marginTop="10dp"
+                    android:text="강사 명"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+            </LinearLayout>
+        </LinearLayout>
 
     </RelativeLayout>
 </android.support.constraint.ConstraintLayout>

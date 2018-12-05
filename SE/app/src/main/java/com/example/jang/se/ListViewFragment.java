@@ -44,7 +44,7 @@ public class ListViewFragment extends Fragment  {
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.i("item", "add클릭" );
+                Log.i("item", "add 클릭" );
                 show();
             }
         });
@@ -79,13 +79,15 @@ public class ListViewFragment extends Fragment  {
         if (requestCode == DIALOG_REQUEST_CODE) {
 
             if (resultCode == Activity.RESULT_OK) {
-
+                MyApplication myapp = (MyApplication)getActivity().getApplication();;
                 String lectureName = data.getExtras().getString("lectureName");
-                String lecturerName = data.getExtras().getString("lecturerName");
+                String lecturerName = myapp.getUserName();
+                String info = data.getExtras().getString("info");
+                int price = data.getExtras().getInt("Price");
                 int numPeople = data.getExtras().getInt("numPeople");
 
                 Toast.makeText(getActivity(), lectureName+"/"+lecturerName,Toast.LENGTH_LONG).show();
-                LectureItem addItems= new LectureItem(lectureName, lecturerName, numPeople, R.drawable.home);
+                LectureItem addItems= new LectureItem(lectureName, lecturerName, numPeople ,  R.drawable.home, price, info);
                 elementos.add(addItems);
             }
 
@@ -96,9 +98,10 @@ public class ListViewFragment extends Fragment  {
     }
 
     private ArrayList<LectureItem> addItems(){
-        LectureItem custom = new LectureItem("기초영어", "json", 1, R.drawable.home);
+        //LectureItem(String title, String lecturer, int num_people, int icon, int price, String info)
+        LectureItem custom = new LectureItem("기초영어", "json", 1, R.drawable.home, 10000, "쉽게 배우는 영어");
         elementos.add(custom);
-        custom = new LectureItem("영어", "현민지",2, R.drawable.home);
+        custom = new LectureItem("영어", "현민지",2, R.drawable.home, 0, "무료로 배우는 영어");
         elementos.add(custom);
         return elementos;
     }

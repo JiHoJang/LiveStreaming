@@ -23,18 +23,22 @@ public class DialogFragmentAddLecture extends android.support.v4.app.DialogFragm
         builder.setView(view);
         final Button submit = (Button) view.findViewById(R.id.buttonSubmit);
         final EditText lectureName = (EditText) view.findViewById(R.id.edittextLectureName);
-        final EditText lecturerName = (EditText) view.findViewById(R.id.edittextLecturerName);
+        final EditText price = (EditText) view.findViewById(R.id.edittextPrice);
         final EditText numPeople = (EditText) view.findViewById(R.id.edittextNumPeople);
+        final EditText info = (EditText) view.findViewById(R.id.edittextInfo);
+
         submit.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 String strLectureName = lectureName.getText().toString();
-                String strLecturerName = lecturerName.getText().toString();
+                String strPrice = price.getText().toString();
                 String strNumPeople = numPeople.getText().toString();
+                String strInfo = info.getText().toString();
 
                 Intent data = new Intent();
                 data.putExtra ("lectureName", strLectureName );
-                data.putExtra ("lecturerName", strLecturerName );
+                data.putExtra ("lecturePrice", strPrice);
                 data.putExtra ("numPeople", strNumPeople );
+                data.putExtra("info", strInfo);
 
                 getTargetFragment().onActivityResult(getTargetRequestCode(), Activity.RESULT_OK, data);
 

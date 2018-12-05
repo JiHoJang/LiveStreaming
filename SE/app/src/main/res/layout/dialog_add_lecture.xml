@@ -37,20 +37,20 @@
     </EditText>
 
     <TextView
-        android:id="@+id/textviewLecturerName"
+        android:id="@+id/textviewPrice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="강사 명"
+        android:text="강의료"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:layout_below="@+id/edittextLectureName" />
 
     <EditText
-        android:id="@+id/edittextLecturerName"
+        android:id="@+id/edittextPrice"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
         android:layout_marginBottom="10dp"
-        android:layout_below="@+id/textviewLecturerName"/>
+        android:layout_below="@+id/textviewPrice"/>
 
     <TextView
         android:id="@+id/textviewNumPeople"
@@ -58,7 +58,7 @@
         android:layout_height="wrap_content"
         android:text="강좌 인원"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:layout_below="@+id/edittextLecturerName" />
+        android:layout_below="@+id/edittextPrice" />
 
     <EditText
         android:id="@+id/edittextNumPeople"
@@ -68,11 +68,27 @@
         android:layout_marginBottom="10dp"
         android:layout_below="@+id/textviewNumPeople"/>
 
+    <TextView
+        android:id="@+id/textviewInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="강의 설명"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_below="@+id/edittextNumPeople" />
+
+    <EditText
+        android:id="@+id/edittextInfo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:layout_marginBottom="10dp"
+        android:layout_below="@+id/textviewInfo"/>
+
     <Button
         android:id="@+id/buttonSubmit"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/edittextNumPeople"
+        android:layout_below="@+id/edittextInfo"
         android:layout_marginBottom="20dp"
         android:text="강의 등록" />
 

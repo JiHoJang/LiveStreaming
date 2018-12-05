@@ -56,6 +56,11 @@ public class ListViewFragment extends Fragment  {
                 Intent intent = new Intent(getActivity(), LectureInfo.class);
                 intent.putExtra ("lectureName", elementos.get(position).getTitle() );
                 intent.putExtra ("lecturerName", elementos.get(position).getLecturer());
+                intent.putExtra("price",elementos.get(position).getPrice());
+                intent.putExtra("numPeople",elementos.get(position).getNum_people());
+                intent.putExtra("nowPeople",elementos.get(position).getNow_people());
+                intent.putExtra("info",elementos.get(position).getInfo());
+                intent.putExtra("profile",elementos.get(position).getIcon());
 
                 startActivity(intent);
             }

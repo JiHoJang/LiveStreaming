@@ -6,4 +6,5 @@
     <color name="textColorPrimary">#FFFFFF</color>
     <color name="windowBackground">#FFFFFF</color>
     <color name="white">#ffffff</color>
+    <color name="gray">#FF646464</color>
 </resources>

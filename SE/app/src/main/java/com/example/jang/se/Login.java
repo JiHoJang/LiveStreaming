@@ -27,7 +27,7 @@ public class Login extends AppCompatActivity {
     com.android.volley.RequestQueue requestQueue;
     String EmailHolder, PWHolder;
     ProgressDialog progressDialog;
-    String SeverURL = "http://192.168.0.100/LogIn.php";
+    String SeverURL = "http://ec2-54-180-31-90.ap-northeast-2.compute.amazonaws.com/LogIn.php";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +45,6 @@ public class Login extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                 startActivity(intent);
-                /*
                 CheckEditTextIsEmptyOrNot();
                 if(!CheckEditText) {
                     Toast.makeText(Login.this, "Please fill in the blank", Toast.LENGTH_LONG).show();
@@ -62,8 +61,9 @@ public class Login extends AppCompatActivity {
                                 progressDialog.dismiss();
 
                                 Toast.makeText(Login.this, SeverResponse, Toast.LENGTH_LONG).show();
+
                                 if (SeverResponse.equals("Success")) {
-                                    //((MyApplication) Login.this.getApplication()).setUserEmail(EmailHolder);
+                                    ((MyApplication) Login.this.getApplication()).setUserEmail(EmailHolder);
 
                                     Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                                     startActivity(intent);
@@ -88,9 +88,10 @@ public class Login extends AppCompatActivity {
                         return params;
                     }
                 };
+
+
                 com.android.volley.RequestQueue requestQueue = Volley.newRequestQueue(Login.this);
                 requestQueue.add(stringRequest);
-                */
             }
         });
     }

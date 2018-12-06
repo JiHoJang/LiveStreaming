@@ -13,9 +13,16 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
 import org.w3c.dom.Text;
+
+import java.util.HashMap;
+import java.util.Map;
 
 
 public class LectureInfo extends AppCompatActivity {
@@ -25,7 +32,11 @@ public class LectureInfo extends AppCompatActivity {
     TextView tv_price;
     TextView tv_num_people;
     TextView tv_info;
+    String SeverURL = "http://ec2-54-180-31-90.ap-northeast-2.compute.amazonaws.com/Subscribe.php";
     Button btn_subscribe;
+    com.android.volley.RequestQueue requestQueue;
+    ProgressDialog progressDialog;
+    boolean CheckEditText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,9 +50,9 @@ public class LectureInfo extends AppCompatActivity {
         tv_info=(TextView)findViewById(R.id.tvInfo);
         btn_subscribe = (Button)findViewById(R.id.btnSubscribe);
 
-        Intent intent=getIntent();
-        String data = intent.getStringExtra(""); // 인텐트에서 전달된 데이터 로드
-        String lectureName = intent.getStringExtra("lectureName");
+        Intent intent = getIntent();
+        final String studentEmail = ((MyApplication) LectureInfo.this.getApplication()).getUserEmail();
+        final String lectureName = intent.getStringExtra("lectureName");
         String lecturerName = intent.getStringExtra("lecturerName");
         int price = intent.getIntExtra("price",0);
         int numPeople = intent.getIntExtra("numPeople",1);
@@ -56,8 +67,55 @@ public class LectureInfo extends AppCompatActivity {
         tv_num_people.setText(nowPeople+"명/"+numPeople+"명");
         tv_info.setText(info);
 
-        //강의 구독 버튼 누르면 lecture과 student DB에 해당 정보 등록되게 하는 php만들어야 할 듯 여기에
+        requestQueue = Volley.newRequestQueue(LectureInfo.this);
+        progressDialog = new ProgressDialog(LectureInfo.this);
 
+        btn_subscribe.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                progressDialog.setMessage("Subscription request complete");
+                progressDialog.show();
+
+                StringRequest stringRequest = new StringRequest(Request.Method.POST, SeverURL,
+                        new Response.Listener<String>() {
+                            @Override
+                            public void onResponse(String SeverResponse) {
+                                progressDialog.dismiss();
+
+                                Toast.makeText(LectureInfo.this, SeverResponse, Toast.LENGTH_LONG).show();
+                                if (SeverResponse.equals("Success"))
+                                    finish();
+                            }
+                        },
+                        new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError volleyError) {
+                                progressDialog.dismiss();
+                                Toast.makeText(LectureInfo.this, volleyError.toString(), Toast.LENGTH_LONG).show();
+                            }
+                        }) {
+
+                    @Override
+                    protected Map<String, String> getParams() {
+                        Map<String, String> params = new HashMap<String, String>();
+
+                        params.put("lectureName", lectureName);
+                        params.put("studentEmail", studentEmail);
+
+                        return params;
+                    }
+
+                };
+
+                com.android.volley.RequestQueue requestQueue = Volley.newRequestQueue(LectureInfo.this);
+
+                requestQueue.add(stringRequest);
+            }
+        });
+
+        //강의 구독 버튼 누르면 lecture과 student DB에 해당 정보 등록되게 하는 php만들어야 할 듯 여기에
+        //어 그래 알겠다
 
     }
 

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/linearLayout">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <EditText
+            android:id="@+id/edittext1"
+            android:layout_width="260dp"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="제목"
+            android:inputType="textPersonName" />
+
+        <Button
+            android:id="@+id/button1"
+            android:layout_width="123dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginStart="1dp"
+            android:layout_marginTop="0dp"
+            android:layout_marginEnd="0dp"
+            android:layout_marginRight="0dp"
+            android:layout_toEndOf="@+id/edittext1"
+            android:text="등록" />
+
+        <EditText
+            android:id="@+id/edittext2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="46dp"
+            android:ems="10"
+            android:hint="내용"
+            android:inputType="textPersonName" />
+    </RelativeLayout>
+</android.support.constraint.ConstraintLayout>

@@ -106,7 +106,7 @@ public class ListViewFragment extends Fragment  {
                 int price = data.getExtras().getInt("Price");
                 int numPeople = data.getExtras().getInt("numPeople");
 
-                Toast.makeText(getActivity(), lectureName+"/"+lecturerName,Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity(), "Successfully, add "+lectureName,Toast.LENGTH_LONG).show();
                 elementos.clear();
                 getData(SeverURL);
                 adapter.notifyDataSetChanged();

@@ -116,7 +116,6 @@ public class DialogFragmentAddLecture extends android.support.v4.app.DialogFragm
                             public void onResponse(String SeverResponse) {
                                 progressDialog.dismiss();
 
-                                Toast.makeText(getContext().getApplicationContext(), SeverResponse, Toast.LENGTH_LONG).show();
                                 if (SeverResponse.equals("Success")) {
 
                                     Intent data = new Intent();

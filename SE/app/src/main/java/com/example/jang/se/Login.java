@@ -60,7 +60,7 @@ public class Login extends AppCompatActivity {
                             public void onResponse(String SeverResponse) {
                                 progressDialog.dismiss();
 
-                                Toast.makeText(Login.this, SeverResponse, Toast.LENGTH_LONG).show();
+                                //Toast.makeText(Login.this, SeverResponse, Toast.LENGTH_LONG).show();
 
                                 if (SeverResponse.equals("Success")) {
                                     int idx = EmailHolder.indexOf("@");

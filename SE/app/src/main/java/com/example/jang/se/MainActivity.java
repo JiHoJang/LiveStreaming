@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
         adapter.addFragment(new ListViewFragment(), "홈");
         adapter.addFragment(new Tab2Fragment(), "내 강의");
         adapter.addFragment(new CalandarFragment(), "일정");
-        adapter.addFragment(new Tab2Fragment(), "설정");
+        adapter.addFragment(new CalandarFragment(), "설정");
 
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);

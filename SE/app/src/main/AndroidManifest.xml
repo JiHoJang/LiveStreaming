@@ -26,6 +26,7 @@ package="com.example.jang.se">
     <activity android:name=".MainActivity" />
     <activity android:name=".Video"/>
     <activity android:name=".LectureInfo"/>
+    <activity android:name=".BoardActivity"/>
 </application>
 
 </manifest>

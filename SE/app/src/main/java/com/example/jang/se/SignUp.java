@@ -19,7 +19,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class SignUp extends AppCompatActivity {
-    String SeverURL = "http://192.168.0.100/SignUp.php";
+    String SeverURL = "http://ec2-54-180-31-90.ap-northeast-2.compute.amazonaws.com/SignUp.php";
     EditText name, email, password, chkpassword;
     Button button;
     com.android.volley.RequestQueue requestQueue;

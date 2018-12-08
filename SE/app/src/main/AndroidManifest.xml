@@ -5,6 +5,7 @@ package="com.example.jang.se">
 <uses-permission android:name="android.permission.INTERNET" />
 <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
+<uses-permission android:name="android.permission.INTERNET" />
 
 <application
     android:name=".MyApplication"
@@ -22,10 +23,15 @@ package="com.example.jang.se">
             <category android:name="android.intent.category.LAUNCHER" />
         </intent-filter>
     </activity>
-    <activity android:name=".SignUp" />
-    <activity android:name=".MainActivity" />
-    <activity android:name=".Video"/>
+    <activity android:name=".SignUp"
+        android:screenOrientation="portrait"/>
+    <activity android:name=".MainActivity"
+        android:screenOrientation="portrait"/>
+    <activity android:name=".Video"
+        android:screenOrientation="sensorLandscape"
+        ></activity>
     <activity android:name=".LectureInfo"/>
+    <activity android:name=".BoardActivity"/>
 </application>
 
 </manifest>

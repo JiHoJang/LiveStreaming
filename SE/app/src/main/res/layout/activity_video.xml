@@ -6,16 +6,45 @@
     android:layout_height="match_parent"
     tools:context=".Video">
 
-    <RelativeLayout
-        android:layout_width="383dp"
-        android:layout_height="565dp"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="1dp">
 
         <net.majorkernelpanic.streaming.gl.SurfaceView
             android:id="@+id/surface"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            app:layout_constraintBottom_toBottomOf="@+id/txt_comment"
+            tools:layout_editor_absoluteX="0dp" />
 
-    </RelativeLayout>
+        <ImageButton
+            android:id="@+id/btn_comment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="visible"
+            app:srcCompat="@android:drawable/sym_action_chat"
+            tools:layout_editor_absoluteX="2dp"
+            tools:layout_editor_absoluteY="515dp" />
+
+        <EditText
+            android:id="@+id/txt_comment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+
+            android:ems="10"
+            android:visibility="invisible"
+            android:background="@color/white"
+            app:layout_constraintStart_toEndOf="@+id/btn_comment"
+            tools:layout_editor_absoluteY="521dp" />
+
+        <Button
+            android:id="@+id/btn_send"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginLeft="12dp"
+            android:text="Send"
+            android:visibility="invisible"
+            app:layout_constraintStart_toEndOf="@+id/txt_comment"
+            tools:layout_editor_absoluteY="521dp" />
+
 </android.support.constraint.ConstraintLayout>

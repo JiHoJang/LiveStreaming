@@ -1,15 +1,26 @@
 package com.example.jang.se;
 
+import android.content.Context;
 import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
+import android.text.method.KeyListener;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+import android.view.View;
 import android.view.ViewGroup.LayoutParams;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Toast;
+
+import com.github.nkzawa.socketio.client.IO;
+import com.github.nkzawa.socketio.client.Socket;
 
 import org.videolan.libvlc.IVLCVout;
 import org.videolan.libvlc.LibVLC;
@@ -17,7 +28,9 @@ import org.videolan.libvlc.Media;
 import org.videolan.libvlc.MediaPlayer;
 
 import java.lang.ref.WeakReference;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
+
 
 //implements RtspClient.Callback, Session.Callback, SurfaceHolder.Callback
 public class Video extends AppCompatActivity implements IVLCVout.Callback {
@@ -29,17 +42,67 @@ public class Video extends AppCompatActivity implements IVLCVout.Callback {
     private org.videolan.libvlc.MediaPlayer mMediaPlayer = null;
     private int mVideoWidth;
     private int mVideoHeight;
+    private ImageButton Comment;
+    private Button Send;
+    private EditText txtComment;
+    private KeyListener originalKeyListener;
+
+    private Socket socket;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_video);
 
-        mFilePath = "rtmp://b03cc5.entrypoint.cloud.wowza.com/app-5020:1935";
+        //mSocket.connect();
+
+        mFilePath = "rtmp://192.168.17.1:1935/live/livedu";
 
         Log.d(TAG, "Playing: " + mFilePath);
         mSurface = (SurfaceView) findViewById(R.id.surface);
         holder = mSurface.getHolder();
+
+        Comment = (ImageButton) findViewById(R.id.btn_comment);
+        Send = (Button) findViewById(R.id.btn_send);
+        txtComment = (EditText) findViewById(R.id.txt_comment);
+
+        originalKeyListener = txtComment.getKeyListener();
+        txtComment.setKeyListener(null);
+
+        try {
+            socket = IO.socket("http://ec2-52-78-57-176.ap-northeast-2.compute.amazonaws.com:3000");
+
+            socket.connect();
+
+            socket.emit("join", "jiho","live");
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
+
+        Comment.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Send.setVisibility(View.VISIBLE);
+                txtComment.setVisibility(View.VISIBLE);
+
+                txtComment.setKeyListener(originalKeyListener);
+                txtComment.requestFocus();
+
+                InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.showSoftInput(txtComment, InputMethodManager.SHOW_IMPLICIT);
+
+                Send.setOnClickListener(new View.OnClickListener() {
+                    public void onClick(View v) {
+                        String message = txtComment.getText().toString().trim();
+                        if (!TextUtils.isEmpty(message)) {
+                            txtComment.setText("");
+                            socket.emit("message", "jiho", message);
+                        }
+                        Send.setVisibility(View.INVISIBLE);
+                        txtComment.setVisibility(View.INVISIBLE);
+                    }
+                });
+            }
+        });
         //mSurfaceView.getHolder().addCallback(this);
 
         //initialize_step();
@@ -56,18 +119,21 @@ public class Video extends AppCompatActivity implements IVLCVout.Callback {
     protected void onResume() {
         super.onResume();
         createPlayer(mFilePath);
+        socket.connect();
     }
 
     @Override
     protected void onPause() {
         super.onPause();
         releasePlayer();
+        socket.disconnect();
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
         releasePlayer();
+        socket.disconnect();
     }
 
     private void setSize(int width, int height) {
@@ -205,6 +271,7 @@ public class Video extends AppCompatActivity implements IVLCVout.Callback {
             }
         }
     }
+
     /*
     public void initialize_step() {
         mSession = SessionBuilder.getInstance()

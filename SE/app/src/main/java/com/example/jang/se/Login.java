@@ -25,7 +25,7 @@ public class Login extends AppCompatActivity {
     Button loginButton;
     Boolean CheckEditText;
     com.android.volley.RequestQueue requestQueue;
-    String EmailHolder, PWHolder;
+    String EmailHolder, PWHolder, NameHolder;
     ProgressDialog progressDialog;
     String SeverURL = "http://ec2-54-180-31-90.ap-northeast-2.compute.amazonaws.com/LogIn.php";
 
@@ -63,7 +63,11 @@ public class Login extends AppCompatActivity {
                                 Toast.makeText(Login.this, SeverResponse, Toast.LENGTH_LONG).show();
 
                                 if (SeverResponse.equals("Success")) {
+                                    int idx = EmailHolder.indexOf("@");
+                                    NameHolder = EmailHolder.substring(0, idx);
+
                                     ((MyApplication) Login.this.getApplication()).setUserEmail(EmailHolder);
+                                    ((MyApplication) Login.this.getApplication()).setUserName(NameHolder);
 
                                     Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                                     startActivity(intent);

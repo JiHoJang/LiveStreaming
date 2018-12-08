@@ -14,7 +14,7 @@ public class LectureItem {
     int price;
     int time;
 
-    public LectureItem(String title, String lecturer, int num_people, int icon, int price, String info){
+    public LectureItem(String title, String lecturer, int num_people,int now_people, int icon, int price, String info){
         this.title = title;
         this.lecturer = lecturer;
         this.num_people = num_people;

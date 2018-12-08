@@ -25,7 +25,7 @@ public class BoardActivity extends AppCompatActivity {
         Myadapter adapter = new Myadapter(this);
         listview1.setAdapter(adapter);
         //등록 레이아웃 생성
-        board1.add(new Board("","","",0));
+        board1.add(new Board("aa","aa","aa",0));
 
         //데이터베이스 연결 필요
     }

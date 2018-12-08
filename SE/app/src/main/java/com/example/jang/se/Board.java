@@ -8,8 +8,6 @@ class Board {
     String content;
     int type;
 
-    Board(){}
-
     Board(String title, String date, String content, int layouttype){
         this.title = title;
         this.date = date;

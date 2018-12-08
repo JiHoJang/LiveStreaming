@@ -22,7 +22,7 @@
             android:id="@+id/date"
             android:layout_width="170dp"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
             android:ems="10"
             android:inputType="textPersonName"
             android:text="시간" />

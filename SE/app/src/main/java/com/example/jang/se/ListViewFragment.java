@@ -158,8 +158,8 @@ public class ListViewFragment extends Fragment  {
             for (int i = 0; i < jsonitems.length(); i++) {
                 JSONObject c = jsonitems.getJSONObject(i);
 
-                Log.i("Getjson", c.getString("SEND_TITLE"));
                 int SN = c.getInt("SEND_SN");
+                Log.i("Getjson", c.getString("SEND_TITLE"));
                 String title = c.getString("SEND_TITLE");
                 String instructor = c.getString("SEND_INSTRUCTOR");
                 int price = c.getInt("SEND_PRICE");

@@ -51,6 +51,7 @@ public class ListViewFragment extends Fragment  {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_home, container, false);
+        Log.i("loglog", "add 클릭" );
         getData(SeverURL);
 
         lv = rootView.findViewById(R.id.listView);
@@ -105,6 +106,8 @@ public class ListViewFragment extends Fragment  {
                 String info = data.getExtras().getString("info");
                 int price = data.getExtras().getInt("Price");
                 int numPeople = data.getExtras().getInt("numPeople");
+                int SN = data.getExtras().getInt("SN");
+
 
                 Toast.makeText(getActivity(), "Successfully, add "+lectureName,Toast.LENGTH_LONG).show();
                 elementos.clear();
@@ -132,7 +135,9 @@ public class ListViewFragment extends Fragment  {
             Log.i("Getjson", "진입성공");
             for (int i = 0; i < jsonitems.length(); i++) {
                 JSONObject c = jsonitems.getJSONObject(i);
+
                 Log.i("Getjson", c.getString("SEND_TITLE"));
+                int SN = c.getInt("SEND_SN");
                 String title = c.getString("SEND_TITLE");
                 String instructor = c.getString("SEND_INSTRUCTOR");
                 int price = c.getInt("SEND_PRICE");
@@ -140,7 +145,7 @@ public class ListViewFragment extends Fragment  {
                 int num_student = c.getInt("SEND_NUM_STUDENT");
                 String lecture_feature = c.getString("SEND_LECTURE_FEATURE");
 
-                LectureItem custom = new LectureItem(title, instructor, max_student,num_student, R.drawable.home, price, lecture_feature);
+                LectureItem custom = new LectureItem(SN, title, instructor, max_student,num_student, R.drawable.home, price, lecture_feature);
 
                 elementos.add(custom);
             }

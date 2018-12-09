@@ -13,14 +13,16 @@ public class LectureItem {
     int now_people;
     int price;
     int time;
+    int SN;
 
-    public LectureItem(String title, String lecturer, int num_people,int now_people, int icon, int price, String info){
+    public LectureItem(int SN, String title, String lecturer, int num_people,int now_people, int icon, int price, String info){
         this.title = title;
         this.lecturer = lecturer;
         this.num_people = num_people;
         this.icon = icon;
         this.price = price;
         this.info = info;
+        this.SN = SN;
 
     }
 
@@ -57,6 +59,8 @@ public class LectureItem {
     public int getPrice() {return price;  }
 
     public int getTime() {return time;  }
+
+    public int getSN(){return SN;}
 
 
 

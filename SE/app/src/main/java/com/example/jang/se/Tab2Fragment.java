@@ -44,9 +44,9 @@ public class Tab2Fragment extends Fragment {
 
     private ArrayList<LectureItem> addItems(){
         //LectureItem(String title, String lecturer, int num_people, int icon, int price, String info)
-        LectureItem custom = new LectureItem("basic English", "json", 1,0, R.drawable.home, 10000, "쉽게 배우는 영어");
+        LectureItem custom = new LectureItem(1111,"basic English", "json", 1,0, R.drawable.home, 10000, "쉽게 배우는 영어");
         elementos.add(custom);
-        custom = new LectureItem("English", "Hyeon minji",2,0, R.drawable.home, 0, "무료로 배우는 영어");
+        custom = new LectureItem(1111,"English", "Hyeon minji",2,0, R.drawable.home, 0, "무료로 배우는 영어");
         elementos.add(custom);
         return elementos;
     }

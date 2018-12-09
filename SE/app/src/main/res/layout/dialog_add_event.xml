@@ -1,50 +1,70 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-
     xmlns:tools="http://schemas.android.com/tools"
-
     android:id="@+id/LinearLayout1"
-
     android:layout_width="match_parent"
-
-    android:layout_height="match_parent"
-
+    android:layout_height="wrap_content"
     android:orientation="vertical"
-
     android:paddingBottom="@dimen/activity_vertical_margin"
-
     android:paddingLeft="@dimen/activity_horizontal_margin"
-
     android:paddingRight="@dimen/activity_horizontal_margin"
-
     android:paddingTop="@dimen/activity_vertical_margin"
-
+    android:layout_gravity="center"
     tools:context=".MainActivity" >
-
-
-
-    <Button
-
-        android:id="@+id/btn1"
-
+    <LinearLayout
+        android:layout_weight="1"
         android:layout_width="match_parent"
-
         android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:clickable="false"
+        android:focusable="false"
+        android:gravity="center">
 
-        android:text="날짜 다이얼로그 보이기" />
+        <EditText
+            android:id="@+id/et_date"
+            android:layout_width="150dp"
+            android:layout_height="50dp"
+            android:text="date"
+            android:clickable="false"
+            android:focusable="false"
+            android:textAlignment="center"
+            />
 
+        <Button
+            android:id="@+id/btn1"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:text="Set Date" />
 
+    </LinearLayout>
+    <LinearLayout
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:orientation="horizontal"
+        android:clickable="false"
+        android:focusable="false"
+        android:gravity="center">
 
+        <EditText
+            android:id="@+id/et_time"
+            android:layout_width="150dp"
+            android:layout_height="50dp"
+            android:text="time"
+            android:clickable="false"
+            android:focusable="false"
+            android:textAlignment="center"/>
     <Button
-
         android:id="@+id/btn2"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:text="Set Time" />
 
-        android:layout_width="match_parent"
-
-        android:layout_height="wrap_content"
-
-        android:text="시간 다이얼로그 보이기" />
-
-
-
+    </LinearLayout>
+    <Button
+        android:id="@+id/btn3"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:text="OK"
+        android:layout_gravity="right"/>
 </LinearLayout>
 

@@ -90,33 +90,29 @@ public class DialogFragmentAddEvent extends DialogFragment {
     com.android.volley.RequestQueue requestQueue;
     ProgressDialog progressDialog;
     int year, month, day, hour, minute;
+    View view = null;
+    EditText et_date = null;
+    EditText et_time =null;
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater = getActivity().getLayoutInflater();
-        View view = inflater.inflate(R.layout.dialog_add_event, null);
+        view = inflater.inflate(R.layout.dialog_add_event, null);
         builder.setView(view);
         GregorianCalendar calendar = new GregorianCalendar();
-
         year = calendar.get(Calendar.YEAR);
-
         month = calendar.get(Calendar.MONTH);
-
         day = calendar.get(Calendar.DAY_OF_MONTH);
-
         hour = calendar.get(Calendar.HOUR_OF_DAY);
-
         minute = calendar.get(Calendar.MINUTE);
+        et_date = view.findViewById(R.id.et_date);
+        et_time = view.findViewById(R.id.et_time);
         view.findViewById(R.id.btn1).setOnClickListener(new View.OnClickListener() {
 
-
             @Override
-
             public void onClick(View v) {
-
                 // TODO Auto-generated method stub
-
                 new DatePickerDialog(getContext(), dateSetListener, year, month, day).show();
 
             }
@@ -124,57 +120,37 @@ public class DialogFragmentAddEvent extends DialogFragment {
         });
 
         view.findViewById(R.id.btn2).setOnClickListener(new View.OnClickListener() {
-
-
             @Override
-
             public void onClick(View v) {
-
                 // TODO Auto-generated method stub
-
                 new TimePickerDialog(getContext(), timeSetListener, hour, minute, false).show();
 
             }
-
         });
 
         return builder.create();
     }
 
     private DatePickerDialog.OnDateSetListener dateSetListener = new DatePickerDialog.OnDateSetListener() {
-
-
         @Override
         public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-
             // TODO Auto-generated method stub
-
             String msg = String.format("%d / %d / %d", year, monthOfYear + 1, dayOfMonth);
-
+            et_date.setText(msg);
             Toast.makeText(getContext(), msg, Toast.LENGTH_SHORT).show();
-
         }
-
     };
 
 
     private TimePickerDialog.OnTimeSetListener timeSetListener = new TimePickerDialog.OnTimeSetListener() {
-
-
         @Override
-
         public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-
             // TODO Auto-generated method stub
-
-            String msg = String.format("%d / %d / %d", year, hourOfDay, minute);
-
+            String msg = String.format("%d : %d", hourOfDay, minute);
+            et_time.setText(msg);
             Toast.makeText(getContext(), msg, Toast.LENGTH_SHORT).show();
-
         }
-
     };
-
 }
 
 /*

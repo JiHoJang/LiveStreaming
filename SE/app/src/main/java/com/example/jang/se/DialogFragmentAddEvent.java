@@ -148,7 +148,7 @@ public class DialogFragmentAddEvent extends DialogFragment {
 
                                 if (SeverResponse.equals("Success")) {
 
-                                    //dismiss();
+                                    dismiss();
                                 }
                             }
                         },

@@ -53,6 +53,7 @@ public class LectureInfo extends AppCompatActivity {
         Intent intent = getIntent();
         final String studentEmail = ((MyApplication) LectureInfo.this.getApplication()).getUserEmail();
         final String lectureName = intent.getStringExtra("lectureName");
+        final String lecture_SN = intent.getStringExtra("SN");
         String lecturerName = intent.getStringExtra("lecturerName");
         int price = intent.getIntExtra("price",0);
         int numPeople = intent.getIntExtra("numPeople",1);
@@ -102,6 +103,7 @@ public class LectureInfo extends AppCompatActivity {
 
                         params.put("lectureName", lectureName);
                         params.put("studentEmail", studentEmail);
+                        params.put("lecture_SN", lecture_SN);
 
                         return params;
                     }

@@ -43,8 +43,6 @@ public class Login extends AppCompatActivity {
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                startActivity(intent);
                 CheckEditTextIsEmptyOrNot();
                 if(!CheckEditText) {
                     Toast.makeText(Login.this, "Please fill in the blank", Toast.LENGTH_LONG).show();

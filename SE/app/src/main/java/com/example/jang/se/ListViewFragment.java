@@ -2,7 +2,6 @@ package com.example.jang.se;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.DialogFragment;
@@ -34,10 +33,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -122,7 +117,7 @@ public class ListViewFragment extends Fragment  {
         if (requestCode == DIALOG_REQUEST_CODE) {
 
             if (resultCode == Activity.RESULT_OK) {
-                MyApplication myapp = (MyApplication)getActivity().getApplication();;
+                MyApplication myapp = (MyApplication)getActivity().getApplication();
                 String lectureName = data.getExtras().getString("lectureName");
                 String lecturerName = myapp.getUserName();
                 String info = data.getExtras().getString("info");
@@ -131,21 +126,52 @@ public class ListViewFragment extends Fragment  {
                 int SN = data.getExtras().getInt("SN");
 
 
-                Toast.makeText(getActivity(), "Successfully, add "+lectureName,Toast.LENGTH_LONG).show();
-                elementos.clear();
-                getData(SeverURL);
-                adapter.notifyDataSetChanged();
-                lv.setAdapter(adapter);
-//                LectureItem addItems= new LectureItem(lectureName, lecturerName, numPeople ,  R.drawable.home, price, info);
-//                elementos.add(addItems);
+                Toast.makeText(getActivity(), lectureName+"/"+lecturerName,Toast.LENGTH_LONG).show();
+                LectureItem addItems= new LectureItem(lectureName, lecturerName, numPeople ,  R.drawable.home, price, info);
+                elementos.add(addItems);
             }
-
         }
-
-
-
     }
 
+    private void lectureRequest(final String keyword) {
+
+        final JsonObjectRequest JsonRequest = new JsonObjectRequest(Request.Method.GET, URL + keyword, null,
+                new Response.Listener<JSONObject>(){
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            JSONArray lectureArray = response.getJSONArray("data");
+                            //if(custom==null)
+                            //  custom = addItems();
+                            elementos.clear();
+
+                            for(int i = 0; i < lectureArray.length(); i++) {
+                                JSONObject lectureObject = lectureArray.getJSONObject(i);
+
+                                String title = lectureObject.getString("SEND_TITLE");
+                                String instructor = lectureObject.getString("SEND_INSTRUCTOR");
+
+                                LectureItem custom = new LectureItem(title, instructor, 30, R.drawable.home, 3, "asdf");
+                                elementos.add(custom);
+                            }
+
+                            adapter = new CustomListAdapter(getActivity(), elementos);
+                            lv.setAdapter(adapter);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener(){
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(getActivity(), error.getMessage(), Toast.LENGTH_LONG).show();
+                    }
+                }) {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("keyword", keyword);
 
     public void showList() {
 

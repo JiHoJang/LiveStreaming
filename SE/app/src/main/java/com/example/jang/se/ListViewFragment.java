@@ -10,6 +10,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.recyclerview.extensions.ListAdapter;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,6 +22,12 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.Toast;
+
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.mancj.materialsearchbar.MaterialSearchBar;
 
 import org.json.JSONArray;
@@ -33,6 +41,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 public class ListViewFragment extends Fragment  {
@@ -47,13 +56,17 @@ public class ListViewFragment extends Fragment  {
     String SeverURL = "http://ec2-54-180-31-90.ap-northeast-2.compute.amazonaws.com/getAllList.php";
     private static final String TAG_RESULTS = "server_response";
     JSONArray jsonitems = null;
+    private String URL;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        URL = "http://ec2-54-180-31-90.ap-northeast-2.compute.amazonaws.com/Search.php?keyword=";
         View rootView = inflater.inflate(R.layout.fragment_home, container, false);
         Log.i("loglog", "add 클릭" );
-        getData(SeverURL);
 
+        getData(SeverURL); //Get list from DB
+
+        searchBar = (MaterialSearchBar) rootView.findViewById(R.id.searchBar);
         lv = rootView.findViewById(R.id.listView);
 
         addButton = (FloatingActionButton)rootView.findViewById(R.id.addButton);
@@ -81,7 +94,16 @@ public class ListViewFragment extends Fragment  {
                 startActivity(intent);
             }
         });
-
+        searchBar.addTextChangeListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
+            @Override
+            public void afterTextChanged(Editable editable) {
+                lectureRequest(searchBar.getText());
+            }
+        });
         return rootView;
 
     }
@@ -199,6 +221,60 @@ public class ListViewFragment extends Fragment  {
         }
         GetDataJSON g = new GetDataJSON();
         g.execute(url);
+    }
+    private void lectureRequest(final String keyword) {
+
+        final JsonObjectRequest JsonRequest = new JsonObjectRequest(Request.Method.GET, URL + keyword, null,
+                new Response.Listener<JSONObject>(){
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            JSONArray lectureArray = response.getJSONArray("data");
+                            //if(custom==null)
+                            //  custom = addItems();
+                            elementos.clear();
+
+                            for(int i = 0; i < lectureArray.length(); i++) {
+
+                                Log.i("Getjson", "진입");
+                                JSONObject lectureObject = lectureArray.getJSONObject(i);
+                                int SN = lectureObject.getInt("SEND_SN");
+                                String title = lectureObject.getString("SEND_TITLE");
+                                String instructor = lectureObject.getString("SEND_INSTRUCTOR");
+                                int price = lectureObject.getInt("SEND_PRICE");
+                                int max_student = lectureObject.getInt("SEND_MAX_STUDENT");
+                                int num_student = lectureObject.getInt("SEND_NUM_STUDENT");
+                                String lecture_feature = lectureObject.getString("SEND_LECTURE_FEATURE");
+                                LectureItem custom = new LectureItem(SN, title, instructor, max_student,num_student, R.drawable.home, price, lecture_feature);
+                                elementos.add(custom);
+                            }
+
+                            adapter = new CustomListAdapter(getActivity(), elementos);
+                            lv.setAdapter(adapter);
+                        } catch (JSONException e) {
+
+                            Log.i("Getjson", "진입실패");
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener(){
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(getActivity(), error.getMessage(), Toast.LENGTH_LONG).show();
+                    }
+                }) {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("keyword", keyword);
+
+                return params;
+            }
+        };
+
+        com.android.volley.RequestQueue requestQueue = Volley.newRequestQueue(getActivity().getApplicationContext());
+        requestQueue.add(JsonRequest);
     }
 
 

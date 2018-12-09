@@ -59,7 +59,9 @@ public class MyLectureListAdapter extends ArrayAdapter<LectureItem> {
             bntAdd.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    show();
+
+                    DialogFragment newFragment = new DialogFragmentAddEvent();
+                    newFragment.show(((AppCompatActivity) context).getSupportFragmentManager(),"dialog");
                 }
             });
 
@@ -77,7 +79,7 @@ public class MyLectureListAdapter extends ArrayAdapter<LectureItem> {
     }
 
     void show(){
-        DialogFragment newFragment = new DialogFragmentAddEvent();
+        DialogFragment newFragment = new DialogFragmentAddLecture();
         newFragment.show(((AppCompatActivity) context).getSupportFragmentManager(),"dialog");
     }
 

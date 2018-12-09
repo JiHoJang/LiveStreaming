@@ -86,16 +86,19 @@ import java.util.Map;
 
 public class DialogFragmentAddEvent extends DialogFragment {
 
-    String ServerURL = "http://ec2-54-180-31-90.ap-northeast-2.compute.amazonaws.com/AddLecture.php";
+    String ServerURL = "http://ec2-54-180-31-90.ap-northeast-2.compute.amazonaws.com/AddEvent.php";
     com.android.volley.RequestQueue requestQueue;
     ProgressDialog progressDialog;
     int year, month, day, hour, minute;
     View view = null;
     EditText et_date = null;
     EditText et_time =null;
+    int SN;
+
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
+        SN = getArguments().getInt("SN");
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater = getActivity().getLayoutInflater();
         view = inflater.inflate(R.layout.dialog_add_event, null);
@@ -108,6 +111,10 @@ public class DialogFragmentAddEvent extends DialogFragment {
         minute = calendar.get(Calendar.MINUTE);
         et_date = view.findViewById(R.id.et_date);
         et_time = view.findViewById(R.id.et_time);
+        requestQueue = Volley.newRequestQueue(getContext().getApplicationContext());
+        progressDialog = new ProgressDialog(getContext().getApplicationContext());
+
+
         view.findViewById(R.id.btn1).setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -127,46 +134,12 @@ public class DialogFragmentAddEvent extends DialogFragment {
 
             }
         });
-
-        return builder.create();
-    }
-
-    private DatePickerDialog.OnDateSetListener dateSetListener = new DatePickerDialog.OnDateSetListener() {
-        @Override
-        public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-            // TODO Auto-generated method stub
-            String msg = String.format("%d / %d / %d", year, monthOfYear + 1, dayOfMonth);
-            et_date.setText(msg);
-            Toast.makeText(getContext(), msg, Toast.LENGTH_SHORT).show();
-        }
-    };
-
-
-    private TimePickerDialog.OnTimeSetListener timeSetListener = new TimePickerDialog.OnTimeSetListener() {
-        @Override
-        public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-            // TODO Auto-generated method stub
-            String msg = String.format("%d : %d", hourOfDay, minute);
-            et_time.setText(msg);
-            Toast.makeText(getContext(), msg, Toast.LENGTH_SHORT).show();
-        }
-    };
-}
-
-/*
-        requestQueue = Volley.newRequestQueue(getContext().getApplicationContext());
-        progressDialog = new ProgressDialog(getContext().getApplicationContext());
-
-        submit.setOnClickListener(new View.OnClickListener() {
+        view.findViewById(R.id.btn3).setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
-                MyApplication myapp = (MyApplication)getActivity().getApplication();;
-                final String strLectureName = lectureName.getText().toString();
-                final String strPrice = price.getText().toString().trim();
-                final String strNumPeople = numPeople.getText().toString().trim();
-                final String strInfo = info.getText().toString();
-                final String strLecturerName =  myapp.getUserName();
-
+                final String strLectureTime = et_time.getText().toString();
+                final String strLectureDay = et_date.getText().toString();
+                final String date = strLectureDay + "  " + strLectureTime;
                 StringRequest stringRequest = new StringRequest(Request.Method.POST, ServerURL,
                         new Response.Listener<String>() {
                             @Override
@@ -175,17 +148,7 @@ public class DialogFragmentAddEvent extends DialogFragment {
 
                                 if (SeverResponse.equals("Success")) {
 
-                                    Intent data = new Intent();
-
-                                    data.putExtra ("lectureName", strLectureName );
-                                    data.putExtra("lecturerName",strLecturerName);
-                                    data.putExtra ("lecturePrice", strPrice);
-                                    data.putExtra ("numPeople", strNumPeople );
-                                    data.putExtra("info", strInfo);
-
-                                    getTargetFragment().onActivityResult(getTargetRequestCode(), Activity.RESULT_OK, data);
-
-                                    dismiss();
+                                    //dismiss();
                                 }
                             }
                         },
@@ -200,12 +163,9 @@ public class DialogFragmentAddEvent extends DialogFragment {
                     protected Map<String, String> getParams() {
 
                         Map<String, String> params = new HashMap<String, String>();
-                        Log.i("loglog",strLecturerName);
-                        params.put("lectureName", strLectureName);
-                        params.put("lecturerName", strLecturerName);
-                        params.put("lecturePrice", strPrice);
-                        params.put("numPeople", strNumPeople);
-                        params.put("info", strInfo);
+
+                        params.put("lectureSN", Integer.toString(SN));
+                        params.put("lectureDate", date);
                         return params;
                     }
                 };
@@ -213,8 +173,44 @@ public class DialogFragmentAddEvent extends DialogFragment {
                 com.android.volley.RequestQueue requestQueue = Volley.newRequestQueue(getContext().getApplicationContext());
 
                 requestQueue.add(stringRequest);
+
+                //getTargetFragment().onActivityResult(getTargetRequestCode(), Activity.RESULT_OK, data);
+                //dismiss();
             }
         });
+
+        return builder.create();
+    }
+
+    private DatePickerDialog.OnDateSetListener dateSetListener = new DatePickerDialog.OnDateSetListener() {
+        @Override
+        public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+            // TODO Auto-generated method stub
+            String msg = String.format("%d/%d/%d", year, monthOfYear + 1, dayOfMonth);
+            et_date.setText(msg);
+            Toast.makeText(getContext(), msg, Toast.LENGTH_SHORT).show();
+        }
+    };
+
+
+    private TimePickerDialog.OnTimeSetListener timeSetListener = new TimePickerDialog.OnTimeSetListener() {
+        @Override
+        public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+            // TODO Auto-generated method stub
+            String msg = String.format("%d:%d", hourOfDay, minute);
+            et_time.setText(msg);
+            Toast.makeText(getContext(), msg, Toast.LENGTH_SHORT).show();
+        }
+    };
+}
+
+/*
+
+        submit.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+
+
+
 
         return builder.create();
     }

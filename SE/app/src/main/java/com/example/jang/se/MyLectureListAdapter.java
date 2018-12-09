@@ -2,6 +2,7 @@ package com.example.jang.se;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
@@ -25,13 +26,14 @@ public class MyLectureListAdapter extends ArrayAdapter<LectureItem> {
     private final ArrayList<LectureItem> elementos;
     private static final int DIALOG_REQUEST_CODE = 1234;
 
+
     public MyLectureListAdapter(Context context, int resource, ArrayList<LectureItem> elementos) {
         super(context, resource, elementos) ;
         this.resourceId = resource ;
         this.context = context;
         this.elementos = elementos;
     }
-    public View getView(int position, View convertView, ViewGroup parent){
+    public View getView(final int position, View convertView, ViewGroup parent){
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View rowView = inflater.inflate(this.resourceId, parent, false);
 
@@ -59,9 +61,12 @@ public class MyLectureListAdapter extends ArrayAdapter<LectureItem> {
             bntAdd.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
                     DialogFragment newFragment = new DialogFragmentAddEvent();
+                    Bundle bundle = new Bundle(1); // 파라미터는 전달할 데이터 개수
+                    bundle.putInt("SN", elementos.get(position).getSN()); // key , value
+                    newFragment.setArguments(bundle);
                     newFragment.show(((AppCompatActivity) context).getSupportFragmentManager(),"dialog");
+
                 }
             });
 
@@ -75,12 +80,8 @@ public class MyLectureListAdapter extends ArrayAdapter<LectureItem> {
         lecturerItem.setText(elementos.get(position).getLecturer());
         iconItem.setImageResource(elementos.get(position).getIcon());
 
-        return rowView;
-    }
 
-    void show(){
-        DialogFragment newFragment = new DialogFragmentAddLecture();
-        newFragment.show(((AppCompatActivity) context).getSupportFragmentManager(),"dialog");
+        return rowView;
     }
 
 }

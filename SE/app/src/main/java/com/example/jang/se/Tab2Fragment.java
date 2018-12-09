@@ -45,6 +45,7 @@ public class Tab2Fragment extends Fragment {
         lv.setAdapter(adapter);
         lv2.setAdapter(adapter2);
 
+
         //] Inflate the layout for this fragment
         return rootView;
     }
@@ -57,6 +58,5 @@ public class Tab2Fragment extends Fragment {
         elementos.add(custom);
         return elementos;
     }
-
 }
 

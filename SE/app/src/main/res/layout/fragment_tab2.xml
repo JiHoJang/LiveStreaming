@@ -7,20 +7,61 @@
 
     <!-- TODO: Update blank fragment layout -->
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <ListView
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:clickable="false"
+            android:focusable="false">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="For student"
+                android:textColor="@color/design_default_color_primary"/>
+            <ListView
             android:id="@+id/listView"
-            android:layout_below="@+id/searchBar"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_alignParentLeft="true"
             android:dividerHeight="0px"
             android:divider="#ffffff"
             >
-
         </ListView>
-    </RelativeLayout>
+       </LinearLayout>
+        <View
+            android:id="@+id/line"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@+id/linearLayout"
+            android:layout_marginTop="10dp"
+            android:background="#A9A9A9" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:clickable="false"
+            android:focusable="false">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="For Lecturer"
+                android:textColor="@color/design_default_color_primary"/>
+            <ListView
+                android:id="@+id/listView2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentLeft="true"
+                android:dividerHeight="0px"
+                android:divider="#ffffff"
+                >
+
+            </ListView>
+        </LinearLayout>
+    </LinearLayout>
 </FrameLayout>

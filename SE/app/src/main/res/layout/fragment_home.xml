@@ -1,19 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     >
-
-    <TextView
-        android:gravity="center"
-        android:id="@+id/textView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text = "강의목록"
-        android:focusable="false"
-    />
 
 
     <com.mancj.materialsearchbar.MaterialSearchBar
@@ -25,26 +17,29 @@
         android:id="@+id/searchBar"
         android:focusable="false"/>
 
-    <ListView
-        android:id="@+id/listView"
-        android:layout_below="@+id/searchBar"
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignParentLeft="true"
-        android:dividerHeight="0px"
-        android:divider="#ffffff"
-        >
+        android:layout_below="@+id/searchBar"
+        android:fillViewport="true">
+        <ListView
+            android:id="@+id/listView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:divider="#ffffff">
+        </ListView>
 
-    </ListView>
-        <android.support.design.widget.FloatingActionButton
-            android:id="@+id/addButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"
-            android:layout_marginBottom="85dp"
-            android:layout_marginRight="16dp"
-            android:src="@drawable/add"
-            android:focusable="false"
-            />
+        </ScrollView>
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/addButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="85dp"
+        android:layout_marginRight="16dp"
+        android:src="@drawable/add"
+        android:focusable="false"
+        />
 </RelativeLayout>

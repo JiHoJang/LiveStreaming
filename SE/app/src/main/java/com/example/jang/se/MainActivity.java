@@ -15,7 +15,7 @@ public class MainActivity extends AppCompatActivity {
             R.drawable.home,
             R.drawable.lecture,
             R.drawable.calendar,
-            R.drawable.setting
+            //R.drawable.setting
     };
 
     @Override
@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
         adapter.addFragment(new ListViewFragment(), "홈");
         adapter.addFragment(new Tab2Fragment(), "내 강의");
         adapter.addFragment(new CalandarFragment(), "일정");
-        adapter.addFragment(new CalandarFragment(), "설정");
+        //adapter.addFragment(new CalandarFragment(), "설정");
 
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);
@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
         tabLayout.getTabAt (0).setIcon(tabIcons[0]);
         tabLayout.getTabAt (1).setIcon(tabIcons[1]);
         tabLayout.getTabAt (2).setIcon(tabIcons[2]);
-        tabLayout.getTabAt (3).setIcon(tabIcons[3]);
+        //tabLayout.getTabAt (3).setIcon(tabIcons[3]);
     }
 
 }

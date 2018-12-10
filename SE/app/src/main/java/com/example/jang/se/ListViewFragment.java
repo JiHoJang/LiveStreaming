@@ -191,7 +191,7 @@ public class ListViewFragment extends Fragment  {
 
                 BufferedReader bufferedReader = null;
                 try {
-
+                    Thread.sleep(2000);
                     URL url = new URL(uri);
                     HttpURLConnection con = (HttpURLConnection) url.openConnection();
                     StringBuilder sb = new StringBuilder();

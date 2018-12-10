@@ -4,12 +4,12 @@ package com.example.jang.se;
 import android.database.Cursor;
 import android.graphics.Color;
 import android.os.AsyncTask;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
-import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
@@ -33,11 +33,6 @@ public class CalandarFragment extends Fragment {
     private final OneDayDecorator oneDayDecorator = new OneDayDecorator();
     Cursor cursor;
     MaterialCalendarView materialCalendarView;
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState){
@@ -74,12 +69,12 @@ public class CalandarFragment extends Fragment {
                 String shot_Day = Year + "," + Month + "," + Day;
 
                 Log.i("shot_Day test", shot_Day + "");
-                materialCalendarView.clearSelection();
+                //materialCalendarView.clearSelection();
 
-                Toast.makeText(getActivity().getApplicationContext(), shot_Day , Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getContext().getApplicationContext(), shot_Day , Toast.LENGTH_SHORT).show();
             }
         });
-        return inflater.inflate(R.layout.fragment_calendar, container, false);
+        return v;
     }
 
     private class ApiSimulator extends AsyncTask<Void, Void, List<CalendarDay>> {
@@ -115,8 +110,6 @@ public class CalandarFragment extends Fragment {
                 calendar.set(year,month-1,dayy);
             }
 
-
-
             return dates;
         }
 
@@ -127,8 +120,8 @@ public class CalandarFragment extends Fragment {
             if (isRemoving()) {
                 return;
             }
+            materialCalendarView.addDecorator(new EventDecorator(Color.RED, calendarDays));
 
-            materialCalendarView.addDecorator(new EventDecorator(Color.GREEN, calendarDays, getActivity()));
         }
     }
 }

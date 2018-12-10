@@ -36,7 +36,6 @@ public class LectureInfo extends AppCompatActivity {
     Button btn_subscribe;
     com.android.volley.RequestQueue requestQueue;
     ProgressDialog progressDialog;
-    boolean CheckEditText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +52,7 @@ public class LectureInfo extends AppCompatActivity {
         Intent intent = getIntent();
         final String studentEmail = ((MyApplication) LectureInfo.this.getApplication()).getUserEmail();
         final String lectureName = intent.getStringExtra("lectureName");
-        final String lecture_SN = intent.getStringExtra("SN");
+        //final String lectureSN = intent.getStringExtra("SN");
         String lecturerName = intent.getStringExtra("lecturerName");
         int price = intent.getIntExtra("price",0);
         int numPeople = intent.getIntExtra("numPeople",1);
@@ -103,7 +102,7 @@ public class LectureInfo extends AppCompatActivity {
 
                         params.put("lectureName", lectureName);
                         params.put("studentEmail", studentEmail);
-                        params.put("lecture_SN", lecture_SN);
+                        //params.put("lectureSN", lectureSN);
 
                         return params;
                     }
@@ -115,9 +114,6 @@ public class LectureInfo extends AppCompatActivity {
                 requestQueue.add(stringRequest);
             }
         });
-
-        //강의 구독 버튼 누르면 lecture과 student DB에 해당 정보 등록되게 하는 php만들어야 할 듯 여기에
-        //어 그래 알겠다
 
     }
 

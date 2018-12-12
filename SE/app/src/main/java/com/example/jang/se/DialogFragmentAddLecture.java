@@ -103,7 +103,7 @@ public class DialogFragmentAddLecture extends android.support.v4.app.DialogFragm
         submit.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
-                MyApplication myapp = (MyApplication)getActivity().getApplication();;
+                MyApplication myapp = (MyApplication)getActivity().getApplication();
                 final String strLectureName = lectureName.getText().toString();
                 final String strPrice = price.getText().toString().trim();
                 final String strNumPeople = numPeople.getText().toString().trim();

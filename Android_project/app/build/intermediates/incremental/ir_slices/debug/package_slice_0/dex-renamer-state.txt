@@ -1,4 +1,0 @@
-#Tue Dec 11 03:37:09 KST 2018
-base.0=/Users/hyun/SE_Team2/SE/app/build/intermediates/transforms/dexMerger/debug/0
-path.0=classes.dex
-renamed.0=classes.dex
